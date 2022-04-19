@@ -1,0 +1,24 @@
+function rot13(str) 
+{
+  let mas=str.split("");
+  let x=0;
+  let a='';
+  for(let i=0;i<mas.length;i++)
+  {
+    x=mas[i].charCodeAt();
+    if(x<65 ||x>122)
+    { a+=String.fromCharCode(x);  }
+    else
+    {  
+       x=x-13;
+       if(x<65){
+        x=(x+26);
+        a+=String.fromCharCode(x);
+       }
+      else {a+=String.fromCharCode(x); }
+    }
+  }
+  return a;
+}
+
+rot13("SERR YBIR?");
