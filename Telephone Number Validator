@@ -1,0 +1,17 @@
+function telephoneCheck(str) {
+  if(str.match(/^[\+]?([1]{0,1}[\s]*)([(][0-9]{3}[)]||[0-9]{3})[-\s\.]*[0-9]{3}[-\s\.]*[0-9]{4}$/im))
+  {
+    if (str.match(/\d/g).length>=10)
+    {
+      console.log("sdf");
+    return true;
+    }
+    else return false;
+  }
+  
+  else {
+    console.log("fssdf");
+    return false;}
+}
+
+telephoneCheck("555 555 5555");
