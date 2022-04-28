@@ -1,0 +1,73 @@
+function checkCashRegister(price, cash, cid) {
+  let change=(cash-price).toFixed(2);
+  let sum=0;
+  let index=0;
+  let j=0;
+  let masret=[];
+  const mas=[
+  ["PENNY", 0.01],
+  ["NICKEL", 0.05],
+  ["DIME", 0.1],
+  ["QUARTER", 0.25],
+  ["ONE", 1],
+  ["FIVE", 5],
+  ["TEN", 10],
+  ["TWENTY", 20],
+  ["ONE HUNDRED", 100]
+]
+  for(let i=0;i<cid.length;i++)
+  {
+    if(mas[i][1]<change){
+    sum=sum+cid[i][1];}
+    if(mas[i][1]<change)
+    {
+      index=i;
+    }
+  }
+  sum=sum.toFixed(2);
+  if(sum<(cash-price)){
+    return {status: "INSUFFICIENT_FUNDS", change: []};
+  }
+  if(sum==(cash-price))
+  {
+    return   {status: "CLOSED", change:cid} ;
+  }
+  else{
+    console.log(change);
+    let y=1;
+     let x=(change%mas[index][1]).toFixed(2);
+    while(change>0)
+    { 
+     
+      let z=(Math.floor(change/mas[index][1]))*mas[index][1];
+       if(z>cid[index][1])
+     {
+       
+       masret[j++]=cid[index].slice(0);
+       x=(Number(x)+Number(z)-Number(cid[index][1])).toFixed(2);
+      cid[index][1]=0;
+     }
+     else{
+       cid[index][1]=cid[index][1]-z;
+      masret[j]=cid[index];
+      masret[j++][1]=(Math.floor(change/mas[index][1]))*mas[index][1];
+      }
+      change=x;
+      for(let i=0;i<mas.length;i++)
+      {
+         if(mas[i][1]<=x && cid[i][1]>0)
+         {
+            console.log(y, "dasda",cid[i],x,mas[i][1]);
+            index=i;
+         }
+      }
+      change=x;
+      x=(change%mas[index][1]).toFixed(2);
+      y++;
+    }
+  }
+  
+  return  {status: "OPEN", change:masret};
+}
+
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]) ;
